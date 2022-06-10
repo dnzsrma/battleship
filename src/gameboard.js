@@ -13,10 +13,9 @@ export class gameboard{
         this.ships.push(ship);
         ship.placeShip(tileNo);
         for(let i = 0 ; i < length ; i++){
-            this.board.splice(tileNo+i,0,true);
+            this.board.splice(tileNo+i,1,true);
         }
     }
-
     receiveAttack(tileNo){
         if(this.board[tileNo] == true){
             for (let i = 0 ; i < this.ships.length ; i++){
