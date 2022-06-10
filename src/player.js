@@ -11,5 +11,5 @@ export class player{
     }
     enemyTurn = () => {
         this.isTurn = false;
-    } 
+    }
 }

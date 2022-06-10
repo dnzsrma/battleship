@@ -10,8 +10,23 @@ body{
     grid-template-rows: repeat(10,50px);
     border: 10px solid white;
 }
-.gameboard-tile{
+.gameboard-tile-ai , .gameboard-tile-player{
     height: 50px;
     width: 50px;
     background-color: white;
+}
+#placement-div{
+    margin: 50px;
+    display: grid;
+    grid-template-columns: repeat(10,50px);
+    grid-template-rows: repeat(10,50px);
+    border: 10px solid white;
+}
+.placement-tile{
+    height: 50px;
+    width: 50px;
+    background-color: white;
+}
+.blue{
+    background-color: blue;
 }
