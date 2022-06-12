@@ -9,11 +9,16 @@ let ships = [4,3,3,2,2,2,1,1,1,1];
 let x = 0;
 function setArr(num){
     if(arr.length < 9){
-        arr.push(num);
-        for(let i = 0 ; i < ships[x]; i++){
-            document.getElementsByClassName('placement-tile')[num+i].classList.add('blue');
+        if( num + ships[x] > (Math.floor(num/10) * 10) + 9){
+            alert('Cant place ship here.');
         }
-        x += 1;
+        else{
+            arr.push(num);
+            for(let i = 0 ; i < ships[x]; i++){
+                document.getElementsByClassName('placement-tile')[num+i].classList.add('blue');
+            }
+            x += 1;
+        }
     }
     else{
         arr.push(num);
@@ -24,6 +29,8 @@ function setArr(num){
         createBoard(game1);
     }
 }
-
+//TODO: 
+// Aynı butona tekrar basılmaması için kontrol eklenecek. Tüm gemiler battığında oyunun
+// bitmesi sağlanacak.
 
 export{setArr}

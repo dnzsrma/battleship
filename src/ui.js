@@ -19,20 +19,25 @@ function createBoard(game){
     container2.classList.add('game-board-container');
     for(let i = 0 ; i < game.player2.board.board.length ; i++){
         let btn2 = document.createElement('button');
-        btn2.onclick = function(){
+        btn2.addEventListener('click', function handler(){
             if(game.player2.isTurn == false && game.player1.isTurn == true){
                 game.checkWhoseTurn();   
                 game.player2.board.receiveAttack(i);
+                game.pressed.push(i);
                 if(game.player2.board.missedShots.includes(i)){
                     btn2.style.backgroundColor = 'red';
+                    game.checkIfGameEnded();
+                    btn2.removeEventListener('click',handler);
                 }
                 else if(game.player2.board.hits.includes(i) && !game.player2.board.missedShots.includes(i)){
                     btn2.style.backgroundColor = 'green';
+                    game.checkIfGameEnded();
+                    btn2.removeEventListener('click',handler);
                 }
                 game.incrementTurn();
                 game.aiPlay();
             }
-        }
+        })
         btn2.classList.add('gameboard-tile-ai');
         container2.appendChild(btn2);
     }
@@ -45,8 +50,9 @@ function createPlacementBoard(){
     for(let i = 0 ; i < 100 ; i++){
         let tile = document.createElement('button');
         tile.classList.add('placement-tile');
-        tile.addEventListener('click',function(){
+        tile.addEventListener('click',function handler(){
             setArr(i);
+            tile.removeEventListener('click',handler);
         });
         div.appendChild(tile);  
     }

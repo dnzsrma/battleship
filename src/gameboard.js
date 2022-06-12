@@ -39,12 +39,10 @@ export class gameboard{
     }
     isAllSunk(){
         for(let i = 0 ; i < this.ships.length ; i++){
-            if(this.ships[i].isSunk() == false){
+            if(!this.ships[i].isSunk()){
                 return false;
             }
-            else{
-                return true;
-            }
         }
+        return true;
     }
 }

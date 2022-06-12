@@ -5,6 +5,8 @@ export class game{
         this.player1 = player1;
         this.player2 = player2;
         this.turn = 1;
+        this.pressed= [];
+        this.aiPlaced = [];
     }
 
 
@@ -36,8 +38,13 @@ export class game{
 
     aiPlay(){
         let hit = Math.floor(Math.random() * 100);
+        while(this.pressed.includes(hit)){
+            hit += 1 ;
+        }
         this.player1.board.receiveAttack(hit);
+        this.pressed.push(hit);
         this.checkPlayerBoard(hit);
+        this.checkIfGameEnded();
     }
 
     aiPlace(){
@@ -47,8 +54,14 @@ export class game{
         while(array.length < ships.length){
             let number = Math.floor(Math.random() * 100);
             if((Math.floor(number/10) * 10) < (number) && (Math.floor(number/10) * 10) + 9 > (number + ships[x])){ 
-                array.push(number);
-                x += 1;
+                if(!this.aiPlaced.includes(number)){
+                    array.push(number);
+                    x += 1;
+                }                  
+                for(let i = 0; i < ships[x] ; i++){
+                    this.aiPlaced.push(number + i);
+                }
+ 
             }
             else{
                 number = Math.floor(Math.random() * 100);
@@ -56,6 +69,7 @@ export class game{
         }
         for(let i = 0 ; i < ships.length ; i++){
             this.player2.board.placeShips(array[i],ships[i]);
+            console.log(ships[i] + ' placed ' + 'at ' + array[i]);
         }
     }
     checkPlayerBoard(hit){
@@ -67,5 +81,14 @@ export class game{
             }
 
     }
-    
+    checkIfGameEnded(){
+        if(this.player1.board.isAllSunk()){
+            alert('Ai won!');
+            location.reload();
+        }
+        else if(this.player2.board.isAllSunk()){
+            alert('Player won!');
+            location.reload();
+        }
+    }
 }

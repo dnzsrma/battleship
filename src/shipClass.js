@@ -18,8 +18,9 @@ export class shipClass{
           if(this.shipPosition.includes(hitPosition)){
               this.alreadyHit.push(hitPosition);
               this.shipPosition = this.shipPosition.filter(value => value !== hitPosition);
-              if(this.alreadyHit.length == this.length && this.shipPosition.length == 0){
+              if(this.shipPosition.length === 0){
                   this.sunk = true;
+                
               }
           }
           else{
